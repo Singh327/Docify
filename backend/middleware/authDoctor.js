@@ -12,8 +12,8 @@ const authDoctor = async(req,res,next)=>{
             message : "Not authorised, login again"
         })
     }
-    const decoded = jwt.verify(dtoken,process.env,JWT_SECRET);
-    req.body.docId = decoded.id;
+    const decoded = jwt.verify(dtoken,process.env.JWT_SECRET);
+     req.user = decoded;
     next();
     }
     catch(e){

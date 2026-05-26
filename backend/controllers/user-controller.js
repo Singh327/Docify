@@ -181,6 +181,7 @@ const bookAppointment = async(req,res)=>{
             message  : "Doctor not available"
          })
       }
+      console.log(docData.slots_booked);
       let slots_booked = docData.slots_booked;
       // Checking for slots availabitlity
       if(slots_booked[slotDate]){
@@ -198,7 +199,9 @@ const bookAppointment = async(req,res)=>{
          slots_booked[slotDate] = [];
          slots_booked[slotDate].push(slotTime);
       }
-      console.log(slots_booked);
+console.log("slots_booked =", slots_booked);
+console.log("slotDate =", slotDate);
+
       const userData = await userModel.findById(userId).select('-password');
       delete docData.slots_booked;
 
@@ -216,8 +219,8 @@ const bookAppointment = async(req,res)=>{
       await newAppointment.save();
        
       // Save new slots data in doctor dataa
-      await doctorModel.findByIdAndUpdate(docId,{slots_booked});
-       
+     const docData1=  await doctorModel.findByIdAndUpdate(docId,{slots_booked});
+   
       
 
       res.json({
