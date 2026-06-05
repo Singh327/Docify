@@ -33,7 +33,7 @@ const Profile = () => {
     });
     if(data.success){
        toast.success("Updated successfully");
-       setUserData(data.userData);
+       getUserData();
        setIsEdit(false);
        setImage(false);
       
